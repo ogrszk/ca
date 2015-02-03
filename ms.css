@@ -1,0 +1,33 @@
+body {
+	margin: 50px;
+	background-color: #333333;
+	color: #ffffff;
+} 
+
+.grid{
+	display: inline-block;
+	margin-bottom: -6px;
+	background-color: #ffffff;
+	width: 30px;
+	height: 30px;
+}
+.grid:hover{
+	background-color: #ffddaa;
+}
+.grid:active{
+	background-color: #ffaa88;
+}
+
+.notPushed{
+	
+}
+
+.pushed{
+	background-color: #dddddd;
+	box-shadow: 3px 3px 3px rgba(0,0,0,0.5) inset;
+
+}
+
+
+
+
