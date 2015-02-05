@@ -39,10 +39,12 @@ for(y=0;y<f_n;y++){
 	for(x=0;x<f_n;x++){
 		tt += m_st[x][y] + ",";
 	}
+	tt += ('|');
 }
 console.log(tt);
 
-function refresh(){
+function refresh () {
+	var clear = true;
 	for(y=0;y<f_n;y++){
 		for(x=0;x<f_n;x++){
 			var a = document.getElementById("x"+x+"y"+y);
@@ -56,11 +58,19 @@ function refresh(){
 					a.classList.add("shadow_t");
 				}
 			}
+			if(p_st[x][y]==m_st[x][y]){
+				clear = false;
+			}
 		}
+	}
+	if(clear){
+		var b = document.getElementById("field");
+		b.classList.add("cleared");
+		alert('Cleared');
 	}
 }
 
-function pushMine(){
+function pushMine () {
 	for(y=0;y<f_n;y++){
 		for(x=0;x<f_n;x++){
 			if(m_st[x][y]){
@@ -71,30 +81,34 @@ function pushMine(){
 	}
 }
 
-function clickGrid(x,y) {
+function clickGrid (x,y) {
 //	alert(x+','+y);
 	p_st[x][y] = true;
 	if(m_st[x][y]) pushMine();
 	var a = document.getElementById("x"+x+"y"+y);
 	a.classList.add("pushed");
+
+	
+
 	refresh();
-	
-	
+}
+
+function cntxtGrid (x,y) {
+	var a = document.getElementById("x"+x+"y"+y);
+	a.classList.toggle("putFlag");
 }
 
 tmp = document.createDocumentFragment();
 
-// var str = document.createTextNode("あ");	// 生成する要素の値（文字列）
-// grid.appendChild(str);
 for(y=0;y<f_n;y++){
 	for(x=0;x<f_n;x++){
 
 		var grd = document.createElement("div");
 		grd.id = 'x'+x+'y'+y;
 		grd.classList.add("grid");
-		var f = "clickGrid("+x+","+y+");";
-		grd.setAttribute('onclick',f);
-	// var elemLi2 = elemLi.cloneNode(true);
+		grd.setAttribute('onclick','clickGrid('+x+','+y+');');
+		grd.setAttribute('oncontextmenu','cntxtGrid('+x+','+y+');return false');
+
 		tmp.appendChild(grd);
 	}
 	var br = document.createElement("br");
