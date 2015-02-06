@@ -1,7 +1,14 @@
-var f_n = 5;	// フィールドの大きさ
-var m_n = 5;	// 地雷の数
+var f_n;	// フィールドの大きさ
+var m_n;	// 地雷の数
 
 var p_st = [];	// 押したかどうか
+var m_st = [];	// 地雷があるかどうか
+
+function init (i_f_n,i_m_n) {
+
+f_n = Number(i_f_n);
+m_n = i_f_n*i_m_n;
+
 for(i=0;i<f_n;i++){
 	p_st[i] = [];
 	for(j=0;j<f_n;j++){
@@ -9,7 +16,7 @@ for(i=0;i<f_n;i++){
 	}
 }
 
-var m_st = [];	// 地雷があるかどうか
+
 for(i=0;i<f_n;i++){
 	m_st[i] = [];
 	for(j=0;j<f_n;j++){
@@ -43,6 +50,28 @@ for(y=0;y<f_n;y++){
 }
 
 console.log(tt);
+
+tmp = document.createDocumentFragment();
+
+for(y=0;y<f_n;y++){
+	for(x=0;x<f_n;x++){
+
+		var grd = document.createElement("div");
+		grd.id = 'x'+x+'y'+y;
+		grd.classList.add("grid");
+		grd.setAttribute('onclick','clickGrid('+x+','+y+');');
+		grd.setAttribute('oncontextmenu','cntxtGrid('+x+','+y+');return false');
+
+		tmp.appendChild(grd);
+	}
+	var br = document.createElement("br");
+	tmp.appendChild(br);
+
+}
+
+field.appendChild(tmp);
+
+}
 
 function howManyMine (x,y) {
 	var aroundMine = 0;
@@ -122,23 +151,4 @@ function cntxtGrid (x,y) {
 	a.classList.toggle("putFlag");
 }
 
-tmp = document.createDocumentFragment();
-
-for(y=0;y<f_n;y++){
-	for(x=0;x<f_n;x++){
-
-		var grd = document.createElement("div");
-		grd.id = 'x'+x+'y'+y;
-		grd.classList.add("grid");
-		grd.setAttribute('onclick','clickGrid('+x+','+y+');');
-		grd.setAttribute('oncontextmenu','cntxtGrid('+x+','+y+');return false');
-
-		tmp.appendChild(grd);
-	}
-	var br = document.createElement("br");
-	tmp.appendChild(br);
-
-}
-
-field.appendChild(tmp);
 
