@@ -91,6 +91,22 @@ function howManyMine (x,y) {
 	return aroundMine;
 }
 
+function extendArea (x,y) {
+	if(x>0){
+		if(y>0 && !m_st[x-1][y-1] && !p_st[x-1][y-1]) clickGrid(x-1,y-1);
+		if(!m_st[x-1][y] && !p_st[x-1][y] && !p_st[x-1][y]) clickGrid(x-1,y);
+		if(y<f_n-1 && !m_st[x-1][y+1] && !p_st[x-1][y+1]) clickGrid(x-1,y+1);
+	}
+	if(y>0 && !m_st[x][y-1] && !p_st[x][y-1]) clickGrid(x,y-1);
+	if(y<f_n-1 && !m_st[x][y+1] && !p_st[x][y+1]) clickGrid(x,y+1);
+
+	if(x<f_n-1){
+		if(y>0 && !m_st[x+1][y-1] && !p_st[x+1][y-1]) clickGrid(x+1,y-1);
+		if(!m_st[x+1][y] && !p_st[x+1][y]) clickGrid(x+1,y);
+		if(y<f_n-1 && !m_st[x+1][y+1] && !p_st[x+1][y+1]) clickGrid(x+1,y+1);
+	}
+}
+
 function refresh () {
 	var clear = true;
 	for(y=0;y<f_n;y++){
@@ -140,7 +156,11 @@ function clickGrid (x,y) {
 		pushMine();
 	}else{
 		var k = howManyMine(x,y);
-		if(k) a.classList.add("m"+k);
+		if(k){
+			a.classList.add("m"+k);
+		}else{
+			extendArea(x,y);
+		}
 	}
 
 	refresh();
