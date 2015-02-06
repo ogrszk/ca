@@ -45,18 +45,34 @@ body {
 	background-image: url(mine.png);
 	background-size: cover;
 }
-
 .putFlag{
 	background-image: url(flag.png);
 	background-size: cover;
 }
 
 .m1{
-	background-image: url(flag.png);
+	background-image: url(1.png);
+	background-size: cover;
+}
+.m2{
+	background-image: url(2.png);
+	background-size: cover;
+}
+.m3{
+	background-image: url(3.png);
+	background-size: cover;
+}
+.m4{
+	background-image: url(4.png);
+	background-size: cover;
+}
+.m5{
+	background-image: url(5.png);
+	background-size: cover;
 }
 
 .cleared{
-	box-shadow: 0px 0px 10px rgba(255,230,200,0.8);
+	box-shadow: 0px 0px 10px rgba(255,230,180,1);
 }
 
 

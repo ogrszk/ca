@@ -41,7 +41,26 @@ for(y=0;y<f_n;y++){
 	}
 	tt += ('|');
 }
+
 console.log(tt);
+
+function howManyMine (x,y) {
+	var aroundMine = 0;
+	if(x>0){
+		if(y>0 && m_st[x-1][y-1]) aroundMine++;
+		if(m_st[x-1][y]) aroundMine++;
+		if(y<f_n-1 && m_st[x-1][y+1]) aroundMine++;
+	}
+	if(y>0 && m_st[x][y-1]) aroundMine++;
+	if(y<f_n-1 && m_st[x][y+1]) aroundMine++;
+
+	if(x<f_n-1){
+		if(y>0 && m_st[x+1][y-1]) aroundMine++;
+		if(m_st[x+1][y]) aroundMine++;
+		if(y<f_n-1 && m_st[x+1][y+1]) aroundMine++;
+	}
+	return aroundMine;
+}
 
 function refresh () {
 	var clear = true;
@@ -84,11 +103,15 @@ function pushMine () {
 function clickGrid (x,y) {
 //	alert(x+','+y);
 	p_st[x][y] = true;
-	if(m_st[x][y]) pushMine();
 	var a = document.getElementById("x"+x+"y"+y);
 	a.classList.add("pushed");
 
-	
+	if(m_st[x][y]){
+		pushMine();
+	}else{
+		var k = howManyMine(x,y);
+		if(k) a.classList.add("m"+k);
+	}
 
 	refresh();
 }
