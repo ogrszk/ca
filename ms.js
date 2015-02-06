@@ -102,9 +102,10 @@ function pushMine () {
 
 function clickGrid (x,y) {
 //	alert(x+','+y);
-	p_st[x][y] = true;
 	var a = document.getElementById("x"+x+"y"+y);
+	if(a.classList.contains("putFlag")) return;
 	a.classList.add("pushed");
+	p_st[x][y] = true;
 
 	if(m_st[x][y]){
 		pushMine();
